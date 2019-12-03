@@ -23,8 +23,41 @@ class Banner
     public function getBanner($id){
 
         (new IDMustBePostiveInt())->goCheck();
-        $banner = BannerModel::getBannerById($id);
+
+        try{
+            $banner = BannerModel::getBannerById($id);
+        }catch(Exception $re){
+            $array = [
+                'errot_code' => 10001,
+                'msg' => $re->getMessage()
+            ];
+            return json($array,400);
+        }
         return $banner;
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
