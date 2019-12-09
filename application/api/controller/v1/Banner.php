@@ -8,8 +8,10 @@
 
 namespace app\api\controller\v1;
 
-use app\api\validate\IDMustBePostiveInt;
 use app\api\model\Banner as BannerModel;
+use app\api\validate\IDMustBePostiveInt;
+use app\lib\exception\BannerMissException;
+use app\lib\exception\ParameterException;
 
 class Banner
 {
@@ -24,14 +26,13 @@ class Banner
 
         (new IDMustBePostiveInt())->goCheck();
 
-        try{
-            $banner = BannerModel::getBannerById($id);
-        }catch(Exception $re){
-            $array = [
-                'errot_code' => 10001,
-                'msg' => $re->getMessage()
-            ];
-            return json($array,400);
+        $banner = BannerModel::get($id);
+//        $banner = BannerModel::getBannerById($id);
+
+        if(!$banner){
+            throw new BannerMissException([
+
+            ]);
         }
         return $banner;
 
