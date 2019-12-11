@@ -9,7 +9,6 @@
 namespace app\api\model;
 
 
-use think\Db;
 use think\Model;
 
 class Banner extends Model
@@ -19,7 +18,9 @@ class Banner extends Model
     }
 
     public static function getBannerById($id){
-        $result = self::with([ 'items', 'items.image'])->find($id);//TODO: :: 为模型静态调用方法, with('items')为关联模型方法
+        //TODO: :: 为模型静态调用方法, with('items')为关联模型方法
+        $result = self::with([ 'items', 'items.image'])->find($id);
+
         return $result;
     }
 }

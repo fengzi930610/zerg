@@ -9,10 +9,8 @@
 namespace app\api\controller\v1;
 
 use app\api\model\Banner as BannerModel;
-use app\api\model\BannerItem;
 use app\api\validate\IDMustBePostiveInt;
 use app\lib\exception\BannerMissException;
-use app\lib\exception\ParameterException;
 
 class Banner
 {
@@ -29,12 +27,13 @@ class Banner
         (new IDMustBePostiveInt())->goCheck();
 
         $banner = BannerModel::getBannerById($id);
-
         if(!$banner){
             throw new BannerMissException([
 
             ]);
         }
+
+        $img_prefix = config('setting.img_prefix');
         return $banner;
 
     }
