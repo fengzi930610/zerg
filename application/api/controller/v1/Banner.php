@@ -28,8 +28,7 @@ class Banner
 
         (new IDMustBePostiveInt())->goCheck();
 
-        $banner = BannerModel::all([1,2,3]);// :: 为模型静态调用方法
-//        $banner = BannerModel::getBannerById($id);
+        $banner = BannerModel::getBannerById($id);
 
         if(!$banner){
             throw new BannerMissException([

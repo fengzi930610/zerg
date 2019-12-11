@@ -14,13 +14,12 @@ use think\Model;
 
 class Banner extends Model
 {
+    public function items(){
+        return $this->hasMany('BannerItem', 'banner_id', 'id');
+    }
+
     public static function getBannerById($id){
-        //TODO:根据Banner ID号 获取banner信息
-        $result = Db::table('banner')
-            ->where(function ($query) use ($id){
-                $query->where('id', '=', $id);
-            })
-            ->find();
+        $result = self::with([ 'items', 'items.image'])->find($id);//TODO: :: 为模型静态调用方法, with('items')为关联模型方法
         return $result;
     }
 }
