@@ -23,7 +23,7 @@ class Banner
      */
 
     public function getBanner($id){
-
+        //开闭原则：即扩展开放，修改封闭的原则
         (new IDMustBePostiveInt())->goCheck();
 
         $banner = BannerModel::getBannerById($id);
@@ -32,8 +32,6 @@ class Banner
 
             ]);
         }
-
-        $img_prefix = config('setting.img_prefix');
         return $banner;
 
     }
